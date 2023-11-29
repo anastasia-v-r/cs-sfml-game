@@ -28,19 +28,23 @@
 
         static void Main(string[] args)
         {
+            VideoMode screenRes = new VideoMode(1920, 1080);
+
             List<RectangleShape> shapes = new List<RectangleShape>();
-            for (int i = 0; i < 38; i++)
+            int subdivisions_x = 120;
+            int subdivisions_y = 180;
+            for (int i = 0; i < subdivisions_x; i++)
             {
-                for (int j = 0; j < 21; j++)
+                for (int j = 0; j < subdivisions_y; j++)
                 {
-                    RectangleShape temp = new RectangleShape(new Vector2f(50, 50));
+                    RectangleShape temp = new RectangleShape(new Vector2f(screenRes.Width / subdivisions_x, screenRes.Height / subdivisions_y));
                     temp.FillColor = RandomColor();
-                    temp.Position = new Vector2f(i * 50, j * 50);
+                    temp.Position = new Vector2f(i * temp.Size.X, j * temp.Size.Y);
                     shapes.Add(temp);
                 }
             }
 
-            RenderWindow window = new RenderWindow(new VideoMode(1920, 1080), "Game!");
+            RenderWindow window = new RenderWindow(screenRes, "Game!");
             window.Closed += (sender, args) => { ((RenderWindow)sender).Close(); return; };
             window.KeyPressed += (sender, args) => {
                 switch (args.Code)
