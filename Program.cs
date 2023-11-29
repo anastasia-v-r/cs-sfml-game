@@ -28,11 +28,17 @@
 
         static void Main(string[] args)
         {
-            List<RectangleShape> shapes = [
-                new RectangleShape(new Vector2f(100, 100)),
-                new RectangleShape(new Vector2f(100, 100)),
-                new RectangleShape(new Vector2f(100, 100))
-            ];
+            List<RectangleShape> shapes = new List<RectangleShape>();
+            for (int i = 0; i < 38; i++)
+            {
+                for (int j = 0; j < 21; j++)
+                {
+                    RectangleShape temp = new RectangleShape(new Vector2f(50, 50));
+                    temp.FillColor = RandomColor();
+                    temp.Position = new Vector2f(i * 50, j * 50);
+                    shapes.Add(temp);
+                }
+            }
 
             RenderWindow window = new RenderWindow(new VideoMode(1920, 1080), "Game!");
             window.Closed += (sender, args) => { ((RenderWindow)sender).Close(); return; };
@@ -49,15 +55,6 @@
                     default: break;
                 }
             };
-
-            
-            shapes[0].FillColor = Color.Black;
-            shapes[0].Position = new Vector2f(100, 100);
-            shapes[1].FillColor = Color.Blue;
-            shapes[1].Position = new Vector2f(200, 200);
-            shapes[2].FillColor = Color.Red;
-            shapes[2].Position = new Vector2f(300, 300);
-
 
             while (window.IsOpen)
             {
